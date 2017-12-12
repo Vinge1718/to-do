@@ -4,7 +4,7 @@ apply plugin: 'application'
 archivesBaseName = "to-do"
 version = "1.0"
 mainClassName = "App"
-applicationName = "to-do"
+applicationName = "todo"
 
 repositories {
     mavenCentral()
