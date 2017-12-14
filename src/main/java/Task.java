@@ -7,7 +7,6 @@ public class Task {
   private String description;
   private boolean completed;
   private LocalDateTime createdAt;
-  //private static List<Task> instances = new ArrayList<Task>();
   private int id;
   private int categoryId;
 
@@ -17,8 +16,7 @@ public class Task {
     completed = false;
     createdAt = LocalDateTime.now();
     this.categoryId = categoryId;
-    //instances.add(this);
-    //mId = instances.size();
+
   }
 
   public static List<Task> all(){
@@ -35,6 +33,20 @@ public class Task {
       }else{
           Task newTask = (Task) otherTask;
           return this.getDescription().equals(newTask.getDescription()) && this.getId() == newTask.getId() && this.getCategoryId() == newTask.getCategoryId();
+      }
+  }
+
+  public void update(String description){
+      try(Connection con = DB.sql2o.open()){
+          String sql = "UPDATE tasks SET description = :description WHERE id = :id";
+          con.createQuery(sql).addParameter("description", description).addParameter("id", id).executeUpdate();
+      }
+  }
+
+  public void delete(){
+      try(Connection con = DB.sql2o.open()){
+          String sql = "DELETE FROM tasks WHERE id = :id;";
+          con.createQuery(sql).addParameter("id", id).executeUpdate();
       }
   }
 

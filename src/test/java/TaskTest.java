@@ -111,4 +111,21 @@ public class TaskTest{
         Task savedTask = Task.find(myTask.getId());
         assertEquals(savedTask.getCategoryId(), myCategory.getId());
     }
+
+    @Test
+    public void update_updatesTasksDescription_true(){
+        Task myTask = new Task("mow the lawn",1);
+        myTask.save();
+        myTask.update("Take a nap");
+        assertEquals("Take a nap", Task.find(myTask.getId()).getDescription());
+    }
+
+    @Test
+    public void delete_deletesTask_true(){
+        Task myTask = new Task("Mow the lawn", 1);
+        myTask.save();
+        int myTaskId = myTask.getId();
+        myTask.delete();
+        assertEquals(null, Task.find(myTaskId));
+    }
 }
