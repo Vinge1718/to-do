@@ -14,6 +14,7 @@ public class DB {
         try {
             if (System.getenv("DATABASE_URL") == null) {
                 dbUri = new URI("postgres://localhost:5432/to_do");
+                logger.info("Using local database.");
             } else {
                 dbUri = new URI(System.getenv("DATABASE_URL"));
             }
